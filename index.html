@@ -5,66 +5,105 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Be My Valentine</title>
 <style>
+/* Body & Background */
 body {
   margin: 0;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(#ffe6ea, #ffd6df);
-  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ffe6f0, #ffccd9);
+  font-family: 'Poppins', Arial, sans-serif;
+  overflow: hidden;
 }
+
+/* Card Container */
 .card {
-  background: #fff0f4;
-  padding: 40px;
-  border-radius: 20px;
+  background: #fff0f6;
+  padding: 50px 30px;
+  border-radius: 25px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
   width: 400px;
   max-width: 90%;
-  transition: all 0.3s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 60px rgba(255, 105, 180, 0.4);
+}
+
+/* Card Image */
 .card img {
-  width: 120px;
-  max-width: 40%;
-  transition: all 0.3s ease;
+  width: 140px;
+  border-radius: 50%;
+  border: 5px solid #ffb3c6;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
+.card img:hover {
+  transform: rotate(-10deg) scale(1.1);
+  border-color: #ff77a9;
+}
+
+/* Headings & Text */
 h1 {
   margin: 20px 0 10px;
-  font-size: 24px;
-  transition: all 0.3s ease;
+  font-size: 26px;
+  color: #ff2e6f;
+  transition: color 0.3s ease;
 }
 p {
   font-size: 16px;
-  transition: all 0.3s ease;
+  color: #d6336c;
 }
+
+/* Buttons Container */
 .buttons {
-  margin-top: 20px;
+  margin-top: 25px;
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
   flex-wrap: wrap;
 }
+
+/* Buttons */
 button {
-  padding: 10px 25px;
+  padding: 12px 30px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: bold;
   transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
 }
-#yes { background: #ff9aa2; color: white; }
-#no { background: #e0e0e0; position: relative; }
+#yes {
+  background: linear-gradient(45deg, #ff66aa, #ff3388);
+  color: white;
+}
+#yes:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.5);
+}
+#no {
+  background: #ffc0d4;
+  color: #a10050;
+  position: relative;
+}
+#no:hover {
+  transform: scale(1.05);
+}
 
+/* Responsive */
 @media (max-width: 600px) {
   .card {
-    padding: 25px;
+    padding: 30px 20px;
   }
   .card img {
-    width: 90px;
+    width: 100px;
   }
   h1 {
-    font-size: 20px;
+    font-size: 22px;
   }
   p {
     font-size: 14px;
@@ -79,9 +118,9 @@ button {
 <body>
 <div class="card">
   <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGV5MGY1dWpnMHFwOXljNmc1ZGYweTFtOXE4MnlqYXFxeWI4OGZuZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bIrlVGMTIktSgOlswS/giphy.gif" alt="Cute Cat" />
-  <h1>Will You be my Valentine? 😊</h1>
-   <p>Say yes, pretty please!</p>
-  
+  <h1>Will You be my Valentine? 💖</h1>
+  <p>Say yes, pretty please!</p>
+
   <div class="buttons">
     <button id="yes">Yes</button>
     <button id="no">No</button>
@@ -100,29 +139,22 @@ const funnyTexts = [
   'Please naaaa 🥺'
 ];
 
-// Function to move "No" button and change image/text
 function moveNoButton() {
   if (!noClicked) {
-    // Change image
     document.querySelector('img').src = 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbG50eWJtbWhoODY2bm1lOXJrMWFlcnM2bHFtN24yejZjNWU3czRwaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/S33oo9EWdlZHW/giphy.gif';
-
-    // Random text
     const randomText = funnyTexts[Math.floor(Math.random() * funnyTexts.length)];
     document.querySelector('h1').innerText = randomText;
     document.querySelector('p').innerText = 'Please don’t say no…';
 
-    // Move button
     const x = Math.random() * 200 - 100;
     const y = Math.random() * 200 - 100;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   }
 }
 
-// Attach events
-noBtn.addEventListener('mouseover', moveNoButton); // Desktop
-noBtn.addEventListener('touchstart', moveNoButton); // Mobile
+noBtn.addEventListener('mouseover', moveNoButton);
+noBtn.addEventListener('touchstart', moveNoButton);
 
-// Yes button click
 document.getElementById('yes').addEventListener('click', () => {
   document.querySelector('img').src = 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2d0NDMzYnlvMnUyaWIyc3J6b3FkbXRkY243Y3V6OTViNmxqcjZzMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/uvRQQUmvvCXB0KTq8F/giphy.gif';
   document.querySelector('h1').innerText = 'Hehehehe, I knew it!';
