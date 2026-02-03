@@ -20,15 +20,30 @@ body {
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  width: 400px;
+  max-width: 90%;
+  transition: all 0.3s ease;
 }
-img {
+.card img {
   width: 120px;
+  max-width: 40%;
+  transition: all 0.3s ease;
 }
 h1 {
   margin: 20px 0 10px;
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+p {
+  font-size: 16px;
+  transition: all 0.3s ease;
 }
 .buttons {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 button {
   padding: 10px 25px;
@@ -36,31 +51,83 @@ button {
   border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
+  transition: all 0.3s ease;
 }
 #yes { background: #ff9aa2; color: white; }
-#no { background: #e0e0e0; margin-left: 10px; position: relative; }
+#no { background: #e0e0e0; position: relative; }
+
+@media (max-width: 600px) {
+  .card {
+    padding: 25px;
+  }
+  .card img {
+    width: 90px;
+  }
+  h1 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 14px;
+  }
+  button {
+    width: 100px;
+    font-size: 14px;
+  }
+}
 </style>
 </head>
 <body>
 <div class="card">
-  <img src="https://i.imgur.com/1Q9Z1Zm.png" alt="Cute Cat" />
+  <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGV5MGY1dWpnMHFwOXljNmc1ZGYweTFtOXE4MnlqYXFxeWI4OGZuZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bIrlVGMTIktSgOlswS/giphy.gif" alt="Cute Cat" />
   <h1>Will You be my Valentine? 😊</h1>
-  <p></p>
+  <p>Lorem ipsum dolor sit amet.</p>
+  
   <div class="buttons">
     <button id="yes">Yes</button>
     <button id="no">No</button>
   </div>
 </div>
+
 <script>
 const noBtn = document.getElementById('no');
-noBtn.addEventListener('mouseover', () => {
-  const x = Math.random() * 200 - 100;
-  const y = Math.random() * 200 - 100;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
-});
+let noClicked = false;
 
+const funnyTexts = [
+  'Manja na! Kitna bhav khaegi 😭',
+  'Itna bhaag kyun rahi ho? 😂',
+  'Aray yaar, ruk jao 😜',
+  'Itni nakhray kyun? 😝',
+  'Please naaaa 🥺'
+];
+
+// Function to move "No" button and change image/text
+function moveNoButton() {
+  if (!noClicked) {
+    // Change image
+    document.querySelector('img').src = 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbG50eWJtbWhoODY2bm1lOXJrMWFlcnM2bHFtN24yejZjNWU3czRwaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/S33oo9EWdlZHW/giphy.gif';
+
+    // Random text
+    const randomText = funnyTexts[Math.floor(Math.random() * funnyTexts.length)];
+    document.querySelector('h1').innerText = randomText;
+    document.querySelector('p').innerText = 'Please don’t say no…';
+
+    // Move button
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  }
+}
+
+// Attach events
+noBtn.addEventListener('mouseover', moveNoButton); // Desktop
+noBtn.addEventListener('touchstart', moveNoButton); // Mobile
+
+// Yes button click
 document.getElementById('yes').addEventListener('click', () => {
-  alert('Yay! ❤️');
+  document.querySelector('img').src = 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2d0NDMzYnlvMnUyaWIyc3J6b3FkbXRkY243Y3V6OTViNmxqcjZzMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/uvRQQUmvvCXB0KTq8F/giphy.gif';
+  document.querySelector('h1').innerText = 'Hehehehe, I knew it!';
+  document.querySelector('p').innerText = '';
+  document.querySelector('.buttons').style.display = 'none';
 });
 </script>
 </body>
